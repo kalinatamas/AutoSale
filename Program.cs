@@ -37,15 +37,7 @@ namespace AutoSale
             while (dr.Read());
             conn.Connection.Close();
         }
-        static void Main(string[] args)
-        {
-            feladat1();
-            foreach (var item in cars)
-            {
-                Console.WriteLine($"Márka: {item.Brand}, Azonosító: {item.License}");
-            }
-            Console.ReadLine();
-        }
+
         static void feladat2()
         {
             string marka, tipus, azon;
@@ -65,11 +57,22 @@ namespace AutoSale
             string sql = $"INSERT INTO `cars`(`Brand`, `Type`, `License`, `Date`) VALUES ('{marka}','{tipus},'{azon},'{ev})";
             conn.Connection.Open();
 
-            MySqlCommand cmd = new MySqlCommand(sql, conn.Connection );
+            MySqlCommand cmd = new MySqlCommand(sql, conn.Connection);
             cmd.ExecuteNonQuery();
 
-            conn.Connection.Close() ;
+            conn.Connection.Close();
         }
+        static void Main(string[] args)
+        {
+            feladat1();
+            foreach (var item in cars)
+            {
+                Console.WriteLine($"Márka: {item.Brand}, Azonosító: {item.License}");
+            }
 
+            feladat2();
+
+            Console.ReadLine();
+        }
     }
 }
