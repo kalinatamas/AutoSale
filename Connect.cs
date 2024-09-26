@@ -19,7 +19,7 @@ namespace AutoSale
         public Connect()
         {
             Host = "127.0.0.1";
-            Database = "autos";
+            Database = "auto";
             User = "root";
             Password = "";
             

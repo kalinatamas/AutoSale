@@ -16,9 +16,13 @@ namespace AutoSale
         {
             string sql = "SELECT * FROM cars";
             conn.Connection.Open();
+
             MySqlCommand cmd = new MySqlCommand(sql, conn.Connection);
             MySqlDataReader dr = cmd.ExecuteReader();
+
             dr.Read();
+
+
             do 
             {
                 Car car = new Car();
@@ -27,6 +31,7 @@ namespace AutoSale
                 car.Type = dr.GetString(2);
                 car.License = dr.GetString(3);
                 car.Date = dr.GetInt32(4);
+                cars.Add(car);
             } 
             
             while (dr.Read());
@@ -39,6 +44,32 @@ namespace AutoSale
             {
                 Console.WriteLine($"Márka: {item.Brand}, Azonosító: {item.License}");
             }
+            Console.ReadLine();
         }
+        static void feladat2()
+        {
+            string marka, tipus, azon;
+            int ev;
+
+            Console.WriteLine("Kérem az autó márkáját: ");
+            marka = Console.ReadLine();
+
+            Console.WriteLine("Kérem az autó tipusat: ");
+            tipus = Console.ReadLine();
+            Console.WriteLine("Kérem az autó azonositojat: ");
+            azon = Console.ReadLine();
+            Console.WriteLine("Kérem az autó évét: ");
+            ev = int.Parse(Console.ReadLine());
+
+
+            string sql = $"INSERT INTO `cars`(`Brand`, `Type`, `License`, `Date`) VALUES ('{marka}','{tipus},'{azon},'{ev})";
+            conn.Connection.Open();
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn.Connection );
+            cmd.ExecuteNonQuery();
+
+            conn.Connection.Close() ;
+        }
+
     }
 }
